@@ -8,6 +8,6 @@
 
 const { INJECT_ADDIN } = require('./lib/constants');
 
-module.exports = (target) => {
+module.exports = target => {
   return target[INJECT_ADDIN];
 };

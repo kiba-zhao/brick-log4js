@@ -21,8 +21,14 @@ function setup(provider, boot, inject, config) {
   }
 
   const log4js = createLog4js(config.configure);
+  if (!config.patterns) {
+    provider.define('log4js', [], log4js);
+    return;
+  }
+
   const loader = boot.createBootLoader(config.patterns, boot.context, config.opts || {});
-  const injector = inject.createInjector(loader, { log4js });
+  const store = { log4js };
+  const injector = inject.createInjector(loader, { store, addins: inject.addins });
   provider.define('log4js', injector.deps, factory.bind(this, injector, log4js));
 
 }
@@ -33,6 +39,6 @@ function factory(injector, log4js, ...args) {
   while (value.done === false) {
     value = modules.next();
   }
+
   return log4js;
 }
-
