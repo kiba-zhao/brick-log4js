@@ -1,6 +1,6 @@
 {
   "name": "brick-log4js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "log4js plugin for brick engine",
   "main": "index.js",
   "types": "typings/index.d.ts",
