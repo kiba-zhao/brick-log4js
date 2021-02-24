@@ -61,7 +61,7 @@ module.exports = Simple;
 // 同等于 xxx.logger = log4js.getLogger();
 logger(Simple);
 // 同等于 xxx.logger1 = log4js.getLogger('app');
-logger(Simple,'app','logger1');
+logger(Simple,{name:'app',property:'logger1'});
 
 ```
 

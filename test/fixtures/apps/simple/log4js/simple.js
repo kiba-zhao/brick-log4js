@@ -13,4 +13,4 @@ module.exports = () => {
   return ctx;
 };
 
-provide(module.exports, 'log4js', 'log4js');
+provide(module.exports, { property: 'log4js', dep: 'log4js' });

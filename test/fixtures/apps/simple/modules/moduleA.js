@@ -14,6 +14,6 @@ module.exports = () => {
   return ctx;
 };
 
-inject(module.exports, [], 'modelA');
+inject(module.exports, { name: 'modelA' });
 logger(module.exports);
-logger(module.exports, 'logger1', 'logger1');
+logger(module.exports, { name: 'logger1', property: 'logger1' });
