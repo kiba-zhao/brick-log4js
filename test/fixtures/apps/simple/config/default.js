@@ -6,18 +6,19 @@
  */
 'use strict';
 
-exports.inject = {
-  modules: { patterns: [ 'modules/**/*.js' ] },
+const { ENGINE } = require('brick-engine');
+const { LOG4JS } = require('../../../../..');
+
+exports[ENGINE] = {
+  modules: { modules: { patterns: 'modules/**/*.js' } },
 };
 
-exports.log4js = {
-  configure: {
-    appenders: {
-      out: { type: 'stdout' },
-    },
-    categories: {
-      default: { appenders: [ 'out' ], level: 'debug' },
-      logger1: { appenders: [ 'out' ], level: 'debug' },
-    },
+exports[LOG4JS] = {
+  appenders: {
+    out: { type: 'stdout' },
+  },
+  categories: {
+    default: { appenders: ['out'], level: 'debug' },
+    logger1: { appenders: ['out'], level: 'debug' },
   },
 };

@@ -6,8 +6,8 @@
  */
 'use strict';
 
-const xboot = require('xboot');
-const xprovide = require('xprovide');
+const { LOG4JS } = require('..');
+const { Engine, inject } = require('brick-engine');
 const path = require('path');
 
 const APP_PATH = path.join(__dirname, 'fixtures', 'apps', 'simple');
@@ -16,55 +16,34 @@ const APP_PATH = path.join(__dirname, 'fixtures', 'apps', 'simple');
 
 describe('simple.test.js', () => {
 
-  let loader;
-  let provider;
-  const Provider = jest.fn();
-  const context = {};
+  let engine;
 
   beforeAll(() => {
-    jest.doMock('xprovide', () => ({ Provider }), { virtual: true });
-    jest.resetModules();
+    engine = new Engine({ chdir: APP_PATH });
   });
 
   beforeEach(() => {
-    Provider.mockImplementation((...args) => {
-      provider = new xprovide.Provider(...args);
-      return provider;
-    });
-    loader = xboot.createBootLoader('xboot.js', context, { chdir: APP_PATH });
+    engine.init();
   });
-
-  afterEach(() => {
-    Provider.mockReset();
-  });
-
 
   afterAll(() => {
-    jest.dontMock('xprovide');
+    engine = undefined;
   });
 
   it('success', () => {
 
-    const log4jsFn = jest.fn();
-    const modulesFn = jest.fn();
+    const fn = jest.fn();
+    inject(fn, { deps: [LOG4JS, 'modules'] });
 
-    loader.forEach(_ => xboot.setup(_, xboot, context));
+    engine.use(fn);
 
-    provider.require([ 'log4js' ], log4jsFn);
-    provider.require([ 'modules' ], modulesFn);
+    expect(fn).toBeCalledTimes(1);
+    const log4js = fn.mock.calls[0][0];
+    const modules = fn.mock.calls[0][1];
 
-    expect(Provider).toBeCalledTimes(1);
-    expect(Provider).toBeCalledWith();
-
-    expect(log4jsFn).toBeCalledTimes(1);
-    const log4js = log4jsFn.mock.calls[0][0];
-
-    expect(modulesFn).toBeCalledTimes(1);
-    const modules = modulesFn.mock.calls[0][0];
-    expect(Object.keys(modules)).toEqual([ 'modelA' ]);
+    expect(Object.keys(modules)).toEqual(['modelA']);
     expect(modules.modelA.logger).toEqual(log4js.getLogger());
     expect(modules.modelA.logger1).toEqual(log4js.getLogger('logger1'));
-    // expect(log4js).toBe(simple.log4js);
 
   });
 

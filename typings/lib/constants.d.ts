@@ -1,1 +1,1 @@
-export var INJECT_ADDIN: symbol;
+export var LOG4JS: symbol;

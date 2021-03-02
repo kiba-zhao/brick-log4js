@@ -21,5 +21,6 @@ export type LoggerOpts = {
  * 日志对象设置函数,将日志对象设置为对象属性
  * @param {any} target 注入对象
  * @param {LoggerOpts} opts 日志对象可选项
+ * @return {any} 注入对象
  */
-export function logger(target: any, opts: LoggerOpts): void;
+export function logger(target: any, opts: LoggerOpts): any;
