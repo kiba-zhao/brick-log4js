@@ -28,14 +28,12 @@ exports.log4js = {
 
 exports.log4js = {
   // log4js中configure方法调用参数.具体请参考log4js文档
-  configure: {
-    appenders: {
-      out: { type: 'stdout' },
-    },
-    categories: {
-      default: { appenders: [ 'out' ], level: 'debug' },
-      logger1: { appenders: [ 'out' ], level: 'debug' },
-    },
+  appenders: {
+    out: { type: 'stdout' },
+  },
+  categories: {
+    default: { appenders: [ 'out' ], level: 'debug' },
+    logger1: { appenders: [ 'out' ], level: 'debug' },
   },
   // log4js预处理模块加载配置(以下为默认设置).请参考xboot包中BootLoader类的构建参数．
   patterns: 'log4js/**/*.js',
