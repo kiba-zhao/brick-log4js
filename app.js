@@ -13,7 +13,7 @@ const { LOG4JS } = require('./lib/constants');
 
 module.exports = engine => {
 
-  const config = engine.config[LOG4JS];
+  const config = engine.config.log4js;
   if (!config) {
     return;
   }

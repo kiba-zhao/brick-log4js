@@ -33,7 +33,7 @@ describe('simple.test.js', () => {
   it('success', () => {
 
     const fn = jest.fn();
-    inject(fn, { deps: [LOG4JS, 'modules'] });
+    inject(fn, { deps: [ LOG4JS, 'modules' ] });
 
     engine.use(fn);
 
@@ -41,7 +41,7 @@ describe('simple.test.js', () => {
     const log4js = fn.mock.calls[0][0];
     const modules = fn.mock.calls[0][1];
 
-    expect(Object.keys(modules)).toEqual(['modelA']);
+    expect(Object.keys(modules)).toEqual([ 'modelA' ]);
     expect(modules.modelA.logger).toEqual(log4js.getLogger());
     expect(modules.modelA.logger1).toEqual(log4js.getLogger('logger1'));
 

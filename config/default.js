@@ -6,8 +6,6 @@
  */
 'use strict';
 
-const { LOG4JS } = require('../lib/constants');
-
-exports[LOG4JS] = {
+exports.log4js = {
   patterns: 'log4js/**/*.js',
 };

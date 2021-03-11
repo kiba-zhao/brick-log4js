@@ -5,20 +5,16 @@
  * @license MIT
  */
 'use strict';
-
-const { ENGINE } = require('brick-engine');
-const { LOG4JS } = require('../../../../..');
-
-exports[ENGINE] = {
+exports.engine = {
   modules: { modules: { patterns: 'modules/**/*.js' } },
 };
 
-exports[LOG4JS] = {
+exports.log4js = {
   appenders: {
     out: { type: 'stdout' },
   },
   categories: {
-    default: { appenders: ['out'], level: 'debug' },
-    logger1: { appenders: ['out'], level: 'debug' },
+    default: { appenders: [ 'out' ], level: 'debug' },
+    logger1: { appenders: [ 'out' ], level: 'debug' },
   },
 };
